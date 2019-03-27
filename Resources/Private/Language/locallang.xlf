@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-12-08T19:12:23Z" product-name="nws_tripmanage">
+		<header/>
+		<body>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwstrip">
+				<source>NetzWerkstatt Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwstrip.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwcurrentstrip">
+				<source>NetzWerkstatt Current Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwcurrentstrip.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripfinder">
+				<source>NetzWerkstatt Trip Finder</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripfinder.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip">
+				<source>Trip</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.itinerary">
+				<source>Itinerary</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.hotelimages">
+				<source>Hotelimages</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.travelperiodstart">
+				<source>Travelperiodstart</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.travelperiodend">
+				<source>Travelperiodend</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.priceperperson">
+				<source>Priceperperson</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.timeprice">
+				<source>Timeprice</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.tourguide">
+				<source>Tourguide</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds">
+				<source>Numberofbeds</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.price">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_tourguide">
+				<source>Tour Guide</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_tourguide.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_tourguide.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_tourguide.telephone">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.jan">
+				<source>Januar</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.feb">
+				<source>Februar</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.march">
+				<source>MÄRZ</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.april">
+				<source>April</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.may">
+				<source>Mai</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.june">
+				<source>Juni</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.july">
+				<source>Juli</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.aug">
+				<source>August</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.sep">
+				<source>September</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.oct">
+				<source>Oktober</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.nov">
+				<source>November</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.dec">
+				<source>Dezember</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.days">
+				<source>Tage ab</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.nothingfound">
+				<source>Trip not available</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.type">
+				<source>Reiseart</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.target">
+				<source>Ziel</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.guide">
+				<source>Reisleitung</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.startdate">
+				<source>Anreise ab</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.searchdays">
+				<source>Dauer in Tagen</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.keyword">
+				<source>stichwortsuche/Reiseziel</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.searchbutton">
+				<source>Suchen starten</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.gesonderteReisen">
+				<source>Gesonderte Reisen</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.reiseKalender">
+				<source>Reise-Kalender</source>
+			</trans-unit>
+		
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.2">
+				<source>2 Bettzimmer</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.3">
+				<source>3 Bettzimmer</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.4">
+				<source>4 Bettzimmer</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.5">
+				<source>3-4 Bettzimmer</source>
+			</trans-unit>
+			
+		</body>
+	</file>
+</xliff>

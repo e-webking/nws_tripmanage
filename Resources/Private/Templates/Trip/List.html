@@ -1,0 +1,82 @@
+{namespace vh=Nwsnet\NwsTripmanage\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+<div  class="tx_nwstripmanage tabs" >
+	
+	<div class="row">
+		<div class="col-md-3 col-sm-6"><a href="#tab01"><f:translate id="tx_nwstripmanage_domain_model_trip.jan" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab02"><f:translate id="tx_nwstripmanage_domain_model_trip.feb" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab03"><f:translate id="tx_nwstripmanage_domain_model_trip.march" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab04"><f:translate id="tx_nwstripmanage_domain_model_trip.april" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab05"><f:translate id="tx_nwstripmanage_domain_model_trip.may" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab06"><f:translate id="tx_nwstripmanage_domain_model_trip.june" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab07"><f:translate id="tx_nwstripmanage_domain_model_trip.july" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab08"><f:translate id="tx_nwstripmanage_domain_model_trip.aug" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab09"><f:translate id="tx_nwstripmanage_domain_model_trip.sep" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab10"><f:translate id="tx_nwstripmanage_domain_model_trip.oct" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab11"><f:translate id="tx_nwstripmanage_domain_model_trip.nov" /></a></div>
+		<div class="col-md-3 col-sm-6"><a href="#tab12"><f:translate id="tx_nwstripmanage_domain_model_trip.dec" /></a></div>
+	</div>
+</div>
+<div class="tab-content">
+	<f:for each="{trips}" as="trip">
+		<div class="tab{f:format.date(date: trip.travelperiodstart,format:'m')} tab-item">
+			<div class="row d-md-flex">
+				<div class="col-md-4 d-md-flex">
+					<f:for each="{trip.image}" as="img" iteration="iterator">
+						<f:if condition="{iterator.index} == '0' ">
+							<f:then>
+								<f:link.action action="show" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripdetail" pageUid="{settings.flexform.detail.pid}" arguments="{trip : trip}"  style="background-image:url('{img.originalResource.publicUrl}');" class="trip-image align-self-stretch d-md-flex">
+									<f:image image="{img}" height="200c" width="200c" class="img-responsive"/>
+								</f:link.action>
+							</f:then>
+						</f:if>
+					</f:for>
+				</div>
+				
+				<div class="col-md-8">
+                	<div class="trip-detail">
+                        <f:link.action action="show" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripdetail" pageUid="{settings.flexform.detail.pid}" arguments="{trip : trip}"> <h4>{trip.title}</h4></f:link.action>
+                        <div class="trip-description">{trip.description -> f:format.crop(maxCharacters: '100', respectWordBoundaries:'1') -> f:format.html()}</div>
+                        <div class="row trip-row">
+                            <div class="col-sm-6">
+                                <div class="trip-duration">{trip.travelperiodstart -> f:format.date()}-{trip.travelperiodend -> f:format.date()}</div>    	
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <div class="trip-price">
+                                	<vh:dayDiff fromDate="{trip.travelperiodstart -> f:format.date()}" toDate="{trip.travelperiodend -> f:format.date()}"/>
+                                	<f:translate id="tx_nwstripmanage_domain_model_trip.days" />
+                                	<span><f:format.currency currencySign="€" >{trip.priceperperson}</f:format.currency></span>
+                                </div>    	
+                            </div>
+                        </div>
+                        <f:link.action action="show" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripdetail" pageUid="{settings.flexform.detail.pid}" arguments="{trip : trip}" class="trip-link">
+                        	<em class="icon icon-arrow-right"></em>
+                    	</f:link.action>
+                    </div>
+				</div>
+			</div>
+			
+		</div>
+	</f:for>
+	<div class="col-md-12 not-found">
+		<p><f:translate id="tx_nwstripmanage_domain_model_trip.nothingfound" /></p>
+	</div>
+</div>
+
+</f:section>
+</html>

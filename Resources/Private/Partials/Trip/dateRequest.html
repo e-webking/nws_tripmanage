@@ -1,0 +1,125 @@
+{namespace vh=Nwsnet\NwsTripmanage\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	  data-namespace-typo3-fluid="true">
+	
+	<div id="myModal" class="modal">
+	  	<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<div role="tabpanel" class="tab-pane active" id="passagier">
+				<div class="panel panel-primary">
+					<div class="panel-heading" role="tab" id="headingTwo">
+					    <h3 class="panel-title">individuelle Terminanfrage</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3>{trip.title}</h3><hr/>
+							</div>
+							<div class="col-sm-8">
+								<div class="form-group">
+									<label>Zeitraum</label>
+									<p><f:format.date format="d.m.Y">{trip.travelperiodstart}</f:format.date> - <f:format.date format="d.m.Y">{trip.travelperiodend}</f:format.date></p>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Dauer</label>
+									<p>
+										<vh:dayDiff fromDate="{trip.travelperiodstart -> f:format.date()}" toDate="{trip.travelperiodend -> f:format.date()}"/> <f:translate id="tx_nwstripmanage_domain_model_trip.days" />
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<f:form action="dateRequest" id="dateRequest" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripdetail" arguments="{trip: trip}">
+			<div class="panel panel-primary" id="passengerpanel-template">
+				<div class="panel-heading" role="tab" id="headingTwo">
+				    <h3 class="panel-title">Reisetermin</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>ab dem </label>
+								<f:form.textfield type="date" name="startdate" class="form-control" required="1" additionalAttributes="{data-errormsg: 'startdate'}" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>bis zum </label>
+								<f:form.textfield type="date" name="enddate" class="form-control " required="1" additionalAttributes="{data-errormsg: 'enddate'}" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary" id="passengerpanel-template">
+				<div class="panel-heading" role="tab" id="headingTwo">
+				    <h3 class="panel-title">Anfragedetails</h3>
+				</div>
+				<div class="panel-body">
+			        <div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Anrede</label>
+								<f:form.select name="gender" options="{salutation}" class="form-control" additionalAttributes="{data-errormsg: 'Anrede'}" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Email <span>*</span></label>
+								<f:form.textfield type="text" name="email" placeholder="email" class="form-control" required="1" additionalAttributes="{data-errormsg: 'Geburtsdatum'}" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Vorname <span>*</span></label>
+								<f:form.textfield type="text" name="firstname" class="form-control" required="1" additionalAttributes="{data-errormsg: 'Vorname'}" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Nachname <span>*</span></label>
+								<f:form.textfield type="text" name="lastname" class="form-control" required="1" additionalAttributes="{data-errormsg: 'Nachname'}" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Straße / Nr.</label>
+								<f:form.textfield type="text" name="street" class="form-control novalidate" required="1" additionalAttributes="{data-errormsg: 'Straße / Nr.'}" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>PLZ</label>
+								<f:form.textfield type="text" name="zip" class="form-control novalidate" required="1" additionalAttributes="{data-errormsg: 'PLZ'}" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Ort</label>
+								<f:form.textfield type="text" name="city" class="form-control novalidate" required="1" additionalAttributes="{data-errormsg: 'Ort'}" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Telefon</label>
+								<f:form.textfield type="text" name="telephone" class="form-control novalidate" required="1" additionalAttributes="{data-errormsg: 'Telefon'}" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<f:form.hidden id="currentPid" name="currentPid" value="{currentPid}" />
+							<f:form.submit class="form-control submitDateRequest" value="Anfrage absenden" />
+						</div>
+					</div>
+		      	</div>
+		    </div>
+			</f:form>
+		</div>
+	</div>
+</html>

@@ -1,0 +1,51 @@
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+<h1>Listing for Trip</h1>
+
+<f:flashMessages />
+
+<table  class="tx_nwstripmanage" >
+	<tr>
+		<th><f:translate key="tx_nwstripmanage_domain_model_trip.title" /></th>
+		<th><f:translate key="tx_nwstripmanage_domain_model_trip.image" /></th>
+		<th><f:translate key="tx_nwstripmanage_domain_model_trip.description" /></th>
+		<th><f:translate key="tx_nwstripmanage_domain_model_trip.itinerary" /></th>
+		<th><f:translate key="tx_nwstripmanage_domain_model_trip.hotelimages" /></th>
+		<th><f:translate key="tx_nwstripmanage_domain_model_trip.travelperiodstart" /></th>
+		<th><f:translate key="tx_nwstripmanage_domain_model_trip.travelperiodend" /></th>
+		<th><f:translate key="tx_nwstripmanage_domain_model_trip.priceperperson" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{trips}" as="trip">
+		<tr>
+			<td><f:link.action action="show" arguments="{trip : trip}"> {trip.title}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{trip : trip}"> {trip.image.originalResource.name}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{trip : trip}"> {trip.description}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{trip : trip}"> {trip.itinerary}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{trip : trip}"> {trip.hotelimages.originalResource.name}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{trip : trip}"> {trip.travelperiodstart -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{trip : trip}"> {trip.travelperiodend -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{trip : trip}"> {trip.priceperperson}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{trip : trip}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{trip : trip}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New Trip</f:link.action>
+</f:section>

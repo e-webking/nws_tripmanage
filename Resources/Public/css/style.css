@@ -1,0 +1,21 @@
+body,
+ul,
+li,
+a,
+p,
+.tab-content p,
+div,
+span,
+font,
+.text-primary,
+h3{color:#808080 !important;font-size:16px !important;font-family:Arial, Helvetica, sans-serif !important;}
+
+ul{padding-left:16px;}
+.trip-details .col-md-5,
+.trip-details .col-md-7{float:left;}
+.trip-details .col-md-5{width:40%;}
+.trip-details .col-md-7{width:60%;}
+.product-price{padding-bottom:50px;}
+.product-price .d-sm-flex{margin-bottom:10px;}
+img{width:100% !important;height: auto !important;margin-bottom:20px !important;}
+h3{color: #21368C !important;font-weight:bold !important;}

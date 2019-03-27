@@ -1,0 +1,67 @@
+
+<table class="tx-nws-tripmanage" >
+	<tr>
+		<td>
+			<f:translate key="tx_nwstripmanage_domain_model_trip.title" />
+		</td>
+		<td>
+			{trip.title}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_nwstripmanage_domain_model_trip.image" />
+		</td>
+		<td>
+			{trip.image.originalResource.name}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_nwstripmanage_domain_model_trip.description" />
+		</td>
+		<td>
+			{trip.description}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_nwstripmanage_domain_model_trip.itinerary" />
+		</td>
+		<td>
+			{trip.itinerary}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_nwstripmanage_domain_model_trip.hotelimages" />
+		</td>
+		<td>
+			{trip.hotelimages.originalResource.name}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_nwstripmanage_domain_model_trip.travelperiodstart" />
+		</td>
+		<td>
+			{trip.travelperiodstart -> f:format.date()}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_nwstripmanage_domain_model_trip.travelperiodend" />
+		</td>
+		<td>
+			{trip.travelperiodend -> f:format.date()}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_nwstripmanage_domain_model_trip.priceperperson" />
+		</td>
+		<td>
+			{trip.priceperperson}
+		</td>
+	</tr>
+</table>

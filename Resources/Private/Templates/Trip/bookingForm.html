@@ -1,0 +1,930 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			xmlns:vh="http://typo3.org/ns/Nwsnet/NwsTripmanage/ViewHelpers"
+			data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+	<f:flashMessages />
+	<f:section name="main">
+		<h2>TRIP BOOKING</h2>
+		<div class="alert alert-danger hide" id="error-container"></div>
+
+		<f:if condition="{showBookingForm}">
+			<f:render section="bookingForm" arguments="{_all}" />
+		</f:if>
+		<f:if condition="{showNumberOfPassenger}">
+			<f:render section="numberofpassenger" arguments="{_all}" />
+		</f:if>
+
+	</f:section>
+
+	<f:section name="bookingForm">
+		<f:form action="createBooking" id="bookingForm" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripbooking" arguments="{trip: trip}" class="bookingForm-form">
+
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#passagier" aria-controls="passagier" role="tab" data-toggle="tab">Gast</a>
+				</li>
+				<li role="presentation">
+					<a href="#allgemeine_information" aria-controls="allgemeine_information" role="tab" data-toggle="tab">Allgemeine Information</a>
+				</li>
+				<li role="presentation">
+					<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Überblick Rservierung</a>
+				</li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="passagier">
+					<div class="panel panel-primary">
+						<div class="panel-heading" role="tab" id="headingTwo">
+						    <h3 class="panel-title">Angaben zur Reise</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-12">
+									<h3>{trip.title}</h3><hr/>
+								</div>
+								<div class="col-sm-8">
+									<div class="form-group">
+										<label>Zeitraum</label>
+										<p><f:format.date format="d.m.Y">{trip.travelperiodstart}</f:format.date> - <f:format.date format="d.m.Y">{trip.travelperiodend}</f:format.date></p>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label>Dauer</label>
+										<p>
+											<vh:dayDiff fromDate="{trip.travelperiodstart -> f:format.date()}" toDate="{trip.travelperiodend -> f:format.date()}"/> <f:translate id="tx_nwstripmanage_domain_model_trip.days" />
+										</p>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Number of Passagier</label>
+										<f:form.textfield type="number" name="numberofpassenger" class="form-control" value="1" additionalAttributes="{min: '1', max: '10', step: '1', data-errormsg: 'Number of Passagier'}" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<f:if condition="{trip.travelPeriod -> f:count()}">
+						<div class="panel panel-primary">
+							<div class="panel-heading" role="tab">
+								<h3 class="panel-title">Travel Period</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-12">
+										<f:for each="{trip.travelPeriod}" as="timeperiod">
+											<div class="checkbox">
+												<label>
+													<f:form.radio name="travelPeriod" value="{timeperiod.uid}" class="do-validate" additionalAttributes="{data-errormsg: 'Termine und Preise'}" />
+													<f:format.date format="d.m.Y">{timeperiod.startdate}</f:format.date> - <f:format.date format="d.m.Y">{timeperiod.enddate}</f:format.date>
+													(<f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator="," prependCurrency="true">{timeperiod.price}</f:format.currency>)
+												</label>
+												<span class="pull-right"><vh:dayDiff fromDate="{timeperiod.startdate -> f:format.date()}" toDate="{timeperiod.enddate -> f:format.date()}"/> <f:translate id="tx_nwstripmanage_domain_model_trip.days" /></span>
+											</div>
+										</f:for>
+									</div>
+								</div>
+							</div>
+						</div>
+					</f:if>
+					<f:comment>
+						<f:if condition="{trip.timeprice -> f:count()}">
+							<div class="panel panel-primary">
+								<div class="panel-heading" role="tab">
+									<h3 class="panel-title">Termine und Preise</h3>
+								</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-sm-12">
+											<f:for each="{trip.timeprice}" as="timeprice">
+												<div class="checkbox">
+													<label>
+														<f:form.radio name="timeprice" value="{timeprice.uid}" class="do-validate" additionalAttributes="{data-errormsg: 'Termine und Preise'}" />
+														<f:translate key="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.{timeprice.numberofbeds}" />
+														(<f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator="," prependCurrency="true">{timeprice.price}</f:format.currency>)
+													</label>
+												</div>
+											</f:for>
+										</div>
+									</div>
+								</div>
+							</div>
+						</f:if>
+					</f:comment>
+					
+					<div class="panel panel-primary">
+						<div class="panel-heading" role="tab">
+							<h3 class="panel-title">Abflugort and Referenz</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<f:if condition="{trip.abflugort -> f:count()}">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Bitte auswählen Abflugort: </label>
+											<f:form.select name="abflugort" class="form-control" options="<vh:createArr abflugort='{trip.abflugort}' />" additionalAttributes="{data-errormsg: 'Abflugort'}" optionValueField="value" optionLabelField="value" />
+										</div>
+									</div>
+								</f:if>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Wie bist Du auf uns aufmerksam geworden?</label>
+										<f:form.textfield type="text" name="referenz" class="form-control" additionalAttributes="{data-errormsg: 'Referenz'}" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				  	<div class="panel panel-primary" id="passengerpanel-template" style="display: none;">
+					    <div class="panel-heading" role="tab">
+					      	<h3 class="panel-title" data-pvalue="Passagier">Passagier</h3>
+					    </div>
+				    	<div class="panel-body">
+					        <div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>Anrede</label>
+										<f:form.select name="gender[]" options="{salutation}" class="form-control" additionalAttributes="{data-errormsg: 'Anrede'}" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>Geburtsdatum <span>*</span></label>
+										<f:form.textfield type="text" name="birthdate[]" placeholder="dd.mm.yyyy" class="form-control datepicker" additionalAttributes="{data-errormsg: 'Geburtsdatum'}" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>Vorname <span>*</span></label>
+										<f:form.textfield type="text" name="firstname[]" class="form-control" additionalAttributes="{data-errormsg: 'Vorname'}" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>Nachname <span>*</span></label>
+										<f:form.textfield type="text" name="lastname[]" class="form-control" additionalAttributes="{data-errormsg: 'Nachname'}" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>Reisepassnummer</label>
+										<f:form.textfield type="text" name="passportnumber[]" class="form-control novalidate" additionalAttributes="{data-errormsg: 'Reisepassnummer'}" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>Nationalität</label>
+										<f:form.textfield type="text" name="nationality[]" class="form-control novalidate" additionalAttributes="{data-errormsg: 'Nationalität'}" />
+									</div>
+								</div>
+								<f:if condition="{trip.studentdiscount} == '1'">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label>bist du schüler?</label>
+											<f:form.radio name="student[]" class="student" value="1" /> Yes
+											<f:form.radio name="student[]" class="student" value="0" /> No
+										</div>
+									</div>
+								</f:if>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>Age</label>
+										<f:form.select name="age[]" options="<vh:createAgeArr />" optionValueField="value" optionLabelField="value" class="form-control agelist" additionalAttributes="{data-errormsg: 'Age'}" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>Verfügbare Räume Für diesen Benutzer</label>
+										<f:form.select name="timeprice[]" options="<vh:createRoomPriceArr roomprice='{trip.timeprice}' />" optionValueField="key" optionLabelField="value" class="form-control bedRoomPrice" additionalAttributes="{data-errormsg: 'Termine und Preise'}" />
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group bedroomprice">
+										<label>Ihr gewählter Schlafzimmerpreis ist : &nbsp;</label><span></span>
+										<f:form.hidden name="bedroomprice[]" class="room_price" value="" />
+									</div>
+								</div>
+								<f:comment>
+									<div class="col-sm-12">
+										<f:if condition="{iterator.isLast}">
+											<f:then>
+												<button type="button" name="nextpanel" class="btn btn-default pull-right nextpanel" role="button" data-toggle="collapse" data-parent="#accordion" data-href="#collapseTwo" href="#" aria-expanded="true" aria-controls="collapseTwo">Weiter</button>
+											</f:then>
+											<f:else>
+												<button type="button" name="nextpanel" class="btn btn-default pull-right nextpanel" role="button" data-toggle="collapse" data-parent="#accordion" data-href="#collapseOne{iterator.cycle}" href="#" aria-expanded="true" aria-controls="collapseOne{iterator.cycle}">Weiter</button>
+											</f:else>
+										</f:if>
+									</div>
+								</f:comment>
+							</div>
+							<f:comment>
+							<div class="row roomPrice">
+								<f:for each="{trip.timeprice}" as="timeprice">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<div class="radio">
+												<label>
+													<f:form.radio name="timeprice" value="{timeprice.uid}" id="{timeprice.price}" class="do-validate" additionalAttributes="{data-errormsg: 'Termine und Preise'}" />
+													<f:translate key="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.{timeprice.numberofbeds}" />
+													(
+													<f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator="," prependCurrency="true">{timeprice.price}</f:format.currency> for 
+													<f:if condition="{timeprice.age}">
+														<f:then>
+															{timeprice.age} years
+														</f:then>
+														<f:else>
+															older
+														</f:else>
+													</f:if>
+													) 
+												</label>
+											</div>
+										</div>
+									</div>
+								</f:for>
+							</div>
+							</f:comment>
+							<f:form.hidden name="pricePerPerson" id="pricePerPerson" value="{trip.priceperperson}" />
+							<f:form.hidden name="tripId" id="tripId" value="{trip.uid}" />
+				      	</div>
+				  	</div>
+				  	<div class="passagier-container"></div>
+
+				  	<div class="panel panel-primary" id="nextpanel-container">
+				    	<div class="panel-body">
+					        <div class="row">
+								<div class="col-sm-12">
+									<button type="button" name="nextpanel" class="btn btn-default pull-right nextpanel" role="button">Weiter</button>
+								</div>
+							</div>
+						</div>
+				  	</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="allgemeine_information">
+					<div class="panel panel-primary">
+						<div class="panel-heading" role="tab" id="headingTwo">
+						    <h3 class="panel-title">Allgemeine Information</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="datenschutz" value="1" additionalAttributes="{required: 'required', data-errormsg: 'Datenschutz'}" class="do-validate" />
+
+												Ich habe die <f:link.page pageUid="16">Datenschutzbestimmungen</f:link.page> gelesen und akzeptiere diese.
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label>Kontaktperson <span>*</span></label>
+										<f:form.select name="contactperson" options="{}" class="do-validate form-control" additionalAttributes="{data-errormsg: 'Kontaktperson'}" />
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label>Tel <span>*</span></label>
+										<f:form.textfield type="text" name="telephone" class="form-control" required="TRUE" additionalAttributes="{data-errormsg: 'Tel'}" />
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label>E-Mail <span>*</span></label>
+										<f:form.textfield type="email" name="email" class="form-control" required="TRUE" additionalAttributes="{data-errormsg: 'E-Mail'}" />
+									</div>
+								</div>
+
+								<div class="col-sm-9">
+									<div class="form-group">
+										<label>Straße <span>*</span></label>
+										<f:form.textfield type="text" name="street" class="form-control" required="TRUE" additionalAttributes="{data-errormsg: 'Straße'}" />
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<label>Haus-Nr. <span>*</span></label>
+										<f:form.textfield type="text" name="housenumber" class="form-control" required="TRUE" additionalAttributes="{data-errormsg: 'Haus-Nr.'}" />
+									</div>
+								</div>
+
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label>PLZ <span>*</span></label>
+										<f:form.textfield type="text" name="plz" class="form-control" required="TRUE" additionalAttributes="{data-errormsg: 'PLZ'}" />
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label>Stadt <span>*</span></label>
+										<f:form.textfield type="text" name="city" class="form-control" required="TRUE" additionalAttributes="{data-errormsg: 'Stadt'}" />
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label>Land <span>*</span></label>
+										<f:form.textfield type="text" name="country" class="form-control" required="TRUE" additionalAttributes="{data-errormsg: 'Land'}" />
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Reiseführung</label>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="travelguidance[1]" value="Deutsch" /> Deutsch
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="travelguidance[2]" value="Türkisch" /> Türkisch
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="travelguidance[4]" value="Arabisch" /> Arabisch
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label>Reiseführung Andere</label>
+										<f:form.textfield type="text" name="travelguidanceother" class="form-control novalidate" />
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Seminarteilnahme</label>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="seminarparticipation[1]" value="Deutsch" /> Deutsch
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="seminarparticipation[2]" value="Türkisch" /> Türkisch
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="seminarparticipation[4]" value="Arabisch - Berbisch" /> Arabisch - Berbisch
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="seminarparticipation[8]" value="Keine Seminarteilnahme" /> Keine Seminarteilnahme
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Zusätzliche Angaben</label>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="additionalinformation[1]" value="Reiserücktrittsversicherung" /> Reiserücktrittsversicherung
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<f:form.checkbox name="additionalinformation[2]" value="Auslandsversicherung" /> Auslandsversicherung
+											</label>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="col-sm-12">
+									<button type="button" id="next" name="nextpanel" class="btn btn-default pull-right nextpanel" role="button" data-toggle="collapse" data-parent="#accordion" data-href="#collapseThree" href="#" aria-expanded="true" aria-controls="collapseThree">Weiter</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="messages">
+					<div class="panel panel-primary">
+						<div class="panel-heading" role="tab" id="headingThree">
+					    	<h3 class="panel-title">Überblick Rservierung</h3>
+					    </div>
+					    <div class="panel-body">
+				      		<div class="form-group">
+				      			<label>{trip.title}</label>
+				      			<p>
+				      				<f:format.date format="d.m.Y">{trip.travelperiodstart}</f:format.date> - <f:format.date format="d.m.Y">{trip.travelperiodend}</f:format.date>
+				      			</p>
+				      			<p class="text-primary priceperperson">
+				      				<strong data-priceperperson="{trip.priceperperson}">
+				      					<f:format.currency currencySign="€" decimalSeparator="," thousandsSeparator="." prependCurrency="true">{trip.priceperperson}</f:format.currency>
+				      				</strong>
+				      			</p>
+				      		</div>
+				      		<div class="hide price-desc-table">
+				      			<hr/>
+				      			<div class="contactdetails">
+				      				<strong>Allgemeine Information</strong>
+				      				<table class="table table-responsive">
+				      					<tr>
+				      						<th>Anschrift</th>
+				      						<td>: <span class="addresse"></span></td>
+				      					</tr>
+				      					<tr>
+				      						<th>E-Mail</th>
+				      						<td>: <span class="email"></span></td>
+				      					</tr>
+				      					<tr>
+				      						<th>Tel</th>
+				      						<td>: <span class="tel"></span></td>
+				      					</tr>
+				      				</table>
+				      			</div>
+				      			<hr/>
+					      		<f:for each="{numberofpassenger}" as="nop" iteration="iterator">
+						      		<div class="form-group price-desc">
+						      			<div class="row">
+						      				<div class="col-sm-9">
+						      					<div class="contactpersonname"></div>
+						      				</div>
+						      				<div class="col-sm-3">
+						      					<div class="contactpersonprice"><f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator="," prependCurrency="true">{trip.priceperperson}</f:format.currency></div>
+						      				</div>
+						      			</div>
+						      		</div>
+					      		</f:for>
+					      		<div class="form-group price-desc">
+					      			<div class="row">
+					      				<div class="col-sm-9">
+					      					<div class="text-right">Total</div>
+					      				</div>
+					      				<div class="col-sm-3">
+					      					<div class="total-price">
+					      						<strong>
+					      						<f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator="," prependCurrency="true">{totalPrice}</f:format.currency>
+					      						</strong>
+					      					</div>
+					      				</div>
+					      			</div>
+					      		</div>
+				      		</div>
+				      		<div class="form-group">
+				      			<f:comment>
+				      				<f:form.hidden name="numberofpassenger" value="{numberofpassenger -> f:count()}" />
+				      			</f:comment>
+					        	<f:form.button type="submit" name="submitButton" class="btn btn-default">Buche und zahle später</f:form.button>
+					        	<f:form.button type="submit" name="payViaPayPal" value="true" class="btn btn-default">Buche & Pay Via PayPal</f:form.button>
+					        </div>
+					    </div>
+					</div>
+				</div>
+			</div>
+
+			<f:comment>
+			<div class="panel-group booking-form" id="accordion" role="tablist" aria-multiselectable="true">
+			  <f:for each="{numberofpassenger}" as="nop" iteration="iterator">
+				  <div class="panel panel-primary">
+				    <div class="panel-heading" role="tab" id="headingOne{iterator.index}">
+				      <h3 class="panel-title">
+				        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne{iterator.index}" aria-expanded="true" aria-controls="collapseOne{iterator.index}">
+				          {iterator.cycle} Passagier
+				        </a>
+				      </h3>
+				    </div>
+				    <div id="collapseOne{iterator.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne{iterator.index}">
+				      <div class="panel-body">
+				        <div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Anrede</label>
+									<f:form.select name="gender[{iterator.index}]" options="{salutation}" class="form-control" />
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Geburtsdatum</label>
+									<f:form.textfield type="text" name="birthdate[{iterator.index}]" class="form-control datepicker" required="TRUE" />
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Vorname</label>
+									<f:form.textfield type="text" name="firstname[{iterator.index}]" class="form-control" required="TRUE" />
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Nachname</label>
+									<f:form.textfield type="text" name="lastname[{iterator.index}]" class="form-control" required="TRUE" />
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Reisepassnummer</label>
+									<f:form.textfield type="text" name="passportnumber[{iterator.index}]" class="form-control novalidate" />
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Nationalität</label>
+									<f:form.textfield type="text" name="nationality[{iterator.index}]" class="form-control novalidate" />
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<f:if condition="{iterator.isLast}">
+									<f:then>
+										<button type="button" name="nextpanel" class="btn btn-default pull-right nextpanel" role="button" data-toggle="collapse" data-parent="#accordion" data-href="#collapseTwo" href="#" aria-expanded="true" aria-controls="collapseTwo">Weiter</button>
+									</f:then>
+									<f:else>
+										<button type="button" name="nextpanel" class="btn btn-default pull-right nextpanel" role="button" data-toggle="collapse" data-parent="#accordion" data-href="#collapseOne{iterator.cycle}" href="#" aria-expanded="true" aria-controls="collapseOne{iterator.cycle}">Weiter</button>
+									</f:else>
+								</f:if>
+							</div>
+						</div>
+				      </div>
+				    </div>
+				  </div>
+			  </f:for>
+
+			  <div class="panel panel-primary">
+			    <div class="panel-heading" role="tab" id="headingTwo">
+			      <h3 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			          Allgemeine Information
+			        </a>
+			      </h3>
+			    </div>
+			    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+			      <div class="panel-body">
+			        <div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Kontaktperson</label>
+								<f:form.select name="contactperson" options="{}" class="form-control" />
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Tel</label>
+								<f:form.textfield type="text" name="telephone" class="form-control" required="TRUE" />
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>E-Mail</label>
+								<f:form.textfield type="email" name="email" class="form-control" required="TRUE" />
+							</div>
+						</div>
+						
+						<div class="col-sm-9">
+							<div class="form-group">
+								<label>Straße</label>
+								<f:form.textfield type="text" name="street" class="form-control" required="TRUE" />
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label>Haus-Nr.</label>
+								<f:form.textfield type="text" name="housenumber" class="form-control" required="TRUE" />
+							</div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>PLZ</label>
+								<f:form.textfield type="text" name="plz" class="form-control" required="TRUE" />
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Stadt</label>
+								<f:form.textfield type="text" name="city" class="form-control" required="TRUE" />
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Land</label>
+								<f:form.textfield type="text" name="country" class="form-control" required="TRUE" />
+							</div>
+						</div>
+
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Reiseführung</label>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="travelguidance[1]" value="Deutsch" /> Deutsch
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="travelguidance[2]" value="Türkisch" /> Türkisch
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="travelguidance[4]" value="Arabisch" /> Arabisch
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Reiseführung Andere</label>
+								<f:form.textfield type="text" name="travelguidanceother" class="form-control novalidate" />
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Seminarteilnahme</label>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="seminarparticipation[1]" value="Deutsch" /> Deutsch
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="seminarparticipation[2]" value="Türkisch" /> Türkisch
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="seminarparticipation[4]" value="Arabisch - Berbisch" /> Arabisch - Berbisch
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="seminarparticipation[8]" value="Keine Seminarteilnahme" /> Keine Seminarteilnahme
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Zusätzliche Angaben</label>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="additionalinformation[1]" value="Reiserücktrittsversicherung" /> Reiserücktrittsversicherung
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<f:form.checkbox name="additionalinformation[2]" value="Auslandsversicherung" /> Auslandsversicherung
+									</label>
+								</div>
+							</div>
+						</div>
+					
+
+						<div class="col-sm-12">
+							<button type="button" name="nextpanel" class="btn btn-default pull-right nextpanel" role="button" data-toggle="collapse" data-parent="#accordion" data-href="#collapseThree" href="#" aria-expanded="true" aria-controls="collapseThree">Weiter</button>
+						</div>
+					</div>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="panel panel-primary">
+			    <div class="panel-heading" role="tab" id="headingThree">
+			      <h3 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+			          Überblick Rservierung
+			        </a>
+			      </h3>
+			    </div>
+			    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+			      <div class="panel-body">
+			      		<div class="form-group">
+			      			<label>{trip.title}</label>
+			      			<p>
+			      				<f:format.date format="d.m.Y">{trip.travelperiodstart}</f:format.date> - <f:format.date format="d.m.Y">{trip.travelperiodend}</f:format.date>
+			      			</p>
+			      			<p class="text-primary">
+			      				<strong>
+			      					<f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator="," prependCurrency="true">{trip.priceperperson}</f:format.currency>
+			      				</strong>
+			      			</p>
+			      		</div>
+			      		<div class="hide price-desc-table">
+			      			<hr/>
+			      			<div class="contactdetails">
+			      				<strong>Allgemeine Information</strong>
+			      				<table class="table table-responsive">
+			      					<tr>
+			      						<th>Anschrift</th>
+			      						<td>: <span class="addresse"></span></td>
+			      					</tr>
+			      					<tr>
+			      						<th>E-Mail</th>
+			      						<td>: <span class="email"></span></td>
+			      					</tr>
+			      					<tr>
+			      						<th>Tel</th>
+			      						<td>: <span class="tel"></span></td>
+			      					</tr>
+			      				</table>
+			      			</div>
+			      			<hr/>
+				      		<f:for each="{numberofpassenger}" as="nop" iteration="iterator">
+					      		<div class="form-group price-desc">
+					      			<div class="row">
+					      				<div class="col-sm-9">
+					      					<div class="contactpersonname"></div>
+					      				</div>
+					      				<div class="col-sm-3">
+					      					<div class="contactpersonprice"><f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator="," prependCurrency="true">{trip.priceperperson}</f:format.currency></div>
+					      				</div>
+					      			</div>
+					      		</div>
+				      		</f:for>
+				      		<div class="form-group price-desc">
+				      			<div class="row">
+				      				<div class="col-sm-9">
+				      					<div class="text-right">Total</div>
+				      				</div>
+				      				<div class="col-sm-3">
+				      					<div class="total-price">
+				      						<strong>
+				      						<f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator="," prependCurrency="true">{totalPrice}</f:format.currency>
+				      						</strong>
+				      					</div>
+				      				</div>
+				      			</div>
+				      		</div>
+			      		</div>
+			      		<div class="form-group">
+			      			<f:form.hidden name="numberofpassenger" value="{numberofpassenger -> f:count()}" />
+				        	<f:form.button type="submit" name="submitButton" class="btn btn-default">Buche und zahle später</f:form.button>
+				        	<f:form.button type="submit" name="payViaPayPal" value="true" class="btn btn-default">Buche & Pay Via PayPal</f:form.button>
+				        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			</f:comment>
+		</f:form>
+		<f:comment>
+			<div class="form-group" style="display: none;">
+				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+				  <input type="hidden" name="cmd" value="_xclick">
+				  <input type="hidden" name="business" value="seller@designerfotos.com">
+				  <input type="hidden" name="item_name" value="hat">
+				  <input type="hidden" name="item_number" value="123">
+				  <input type="hidden" name="amount" value="{totalPrice}">
+				  <input type="hidden" name="first_name" value="John">
+				  <input type="hidden" name="last_name" value="Doe">
+				  <input type="hidden" name="address1" value="9 Elm Street">
+				  <input type="hidden" name="address2" value="Apt 5">
+				  <input type="hidden" name="city" value="Berwyn">
+				  <input type="hidden" name="state" value="PA">
+				  <input type="hidden" name="zip" value="19312">
+				  <input type="hidden" name="night_phone_a" value="610">
+				  <input type="hidden" name="night_phone_b" value="555">
+				  <input type="hidden" name="night_phone_c" value="1234">
+				  <input type="hidden" name="return" value="https://www.csviill.csv.rexzetsolutions.com/trip-list/trip-booking/">
+				  <input type="hidden" name="email" value="jdoe@zyzzyu.com">
+				  <input type="image" name="submit"
+				    src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
+				    alt="PayPal - The safer, easier way to pay online">
+				</form>
+			</div>
+		</f:comment>
+	</f:section>	
+
+	<f:section name="numberofpassenger">
+		<f:form action="bookingForm" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripbooking" arguments="{trip: trip}">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label>Number of Passagier</label>
+						<f:form.textfield type="text" name="numberofpassenger" class="form-control" />
+					</div>
+					<div class="form-group">
+						<f:form.button type="submit" name="numberofpassengerSubmitButton" class="btn btn-primary">Save</f:form.button>
+					</div>
+				</div>
+			</div>
+		</f:form>
+	</f:section>
+
+
+
+
+	<f:comment>
+		<f:section name="temp">
+			<div class="passenger-details">	
+				<h3>Passagier</h3>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Anrede</label>
+							<select name="gender" class="form-control">
+								<option>Herr</option>
+								<option>Frau</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Geburtsdatum</label>
+							<input type="text" name="birthdate" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Vorname</label>
+							<input type="text" name="firstname" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Nachname</label>
+							<input type="text" name="lastname" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Reisepassnummer</label>
+							<input type="text" name="passportnumber" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Nationalität</label>
+							<input type="text" name="nationality" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="general-information">
+				<h3>Allgemeine Information</h3>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>Kontaktperson</label>
+							<select name="contactperson" class="form-control">
+								<option></option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>Tel</label>
+							<input type="text" name="telephone" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>E-Mail</label>
+							<input type="text" name="email" class="form-control">
+						</div>
+					</div>
+					
+					<div class="col-sm-9">
+						<div class="form-group">
+							<label>Straße</label>
+							<input type="text" name="street" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label>Haus-Nr.</label>
+							<input type="text" name="housenumber" class="form-control">
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>PLZ</label>
+							<input type="text" name="plz" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>Stadt</label>
+							<input type="text" name="city" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>Land</label>
+							<input type="text" name="country" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="overview-reservation">
+				<h3>Überblick Rservierung</h3>
+				<div class="row">
+					
+				</div>
+			</div>
+		</f:section>
+	</f:comment>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-12-08T19:12:23Z" product-name="nws_tripmanage">
+		<header/>
+		<body>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwstrip">
+				<source>NetzWerkstatt Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwstrip.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwcurrentstrip">
+				<source>NetzWerkstatt Current Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwcurrentstrip.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripfinder">
+				<source>NetzWerkstatt Trip Finder</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripfinder.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="image.description">
+				<source>image</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="itinerary.description">
+				<source>itinerary</source>
+			</trans-unit>
+			<trans-unit id="hotelimages.description">
+				<source>hotelimages</source>
+			</trans-unit>
+			<trans-unit id="travelperiodstart.description">
+				<source>travelperiodstart</source>
+			</trans-unit>
+			<trans-unit id="travelperiodend.description">
+				<source>travelperiodend</source>
+			</trans-unit>
+			<trans-unit id="priceperperson.description">
+				<source>priceperperson</source>
+			</trans-unit>
+			<trans-unit id="timeprice.description">
+				<source>timeprice</source>
+			</trans-unit>
+			<trans-unit id="tourguide.description">
+				<source>tourguide</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

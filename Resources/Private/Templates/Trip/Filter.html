@@ -1,0 +1,142 @@
+{namespace vh=Nwsnet\NwsTripmanage\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+<div class="search-form">
+	<f:form action="filter" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripfinder" name="filter" pageUid="{settings.nwtripfinderId}">
+		<div class="row">
+			<div class="col-lg-3 col-md-4 col-sm-6">
+            	<div class="form-group">
+                    <label><f:translate id="tx_nwstripmanage_domain_model_trip.type" /></label>
+                    <f:form.select class="form-control" name="type" value="{selectedType}" options="{hadsch:'Hadsch',umrah:'Umrah',quds:'Quds'}"  prependOptionLabel="Alle"  />
+                </div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+            	<div class="form-group">
+                    <label><f:translate id="tx_nwstripmanage_domain_model_trip.gesonderteReisen" /></label>
+                    <f:form.select class="form-control" name="gesonderteReisen" value="{selectedgesonderteReisen}" options="{special_umrah:'Special Umrah',ferien:'Ferien'}"  prependOptionLabel="Alle"  />
+                </div>
+			</div>
+			<f:comment>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+            	<div class="form-group">
+                    <label><f:translate id="tx_nwstripmanage_domain_model_trip.target" /></label>
+                    <f:form.select class="form-control" name="target" value="{selectedTarget}" options="{ziels}"  optionValueField="uid" optionLabelField="name"  prependOptionLabel="Alle" />
+                </div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+            	<div class="form-group">
+                    <label><f:translate id="tx_nwstripmanage_domain_model_trip.guide" /></label>
+                    <f:form.select class="form-control" name="guide" value="{selectedGuide}" options="{guides}"  optionValueField="uid" optionLabelField="name"  prependOptionLabel="Alle" />
+                </div>
+			</div>
+			</f:comment>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+            	<div class="form-group">
+                    <label><f:translate id="tx_nwstripmanage_domain_model_trip.startdate" /></label>
+                    <f:form.textfield name="arrivedate" class="datepicker form-control" value="{selectedDate}" />
+                </div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+            	<div class="form-group">
+                    <label><f:translate id="tx_nwstripmanage_domain_model_trip.searchdays" /></label>
+                    <f:form.select class="form-control" name="duration" options="{durations}" value="{selectedDuration}" prependOptionLabel=""/>
+                </div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+            	<div class="form-group">
+                    <label><f:translate id="tx_nwstripmanage_domain_model_trip.keyword" /></label>
+                    <f:form.textfield class="form-control" name="keyword"  value="{selectedKeyword}" />
+                </div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<div class="form-group">
+                	<label>&nbsp;</label>
+					<f:form.button type="submit" name="submitForm" value="submitForm" class="btn btn-default btn-block"><f:translate id="tx_nwstripmanage_domain_model_trip.searchbutton" /></f:form.button>
+                </div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+            	<div class="form-group">
+                    <label>&nbsp;</label>
+                    <div class="calendar_link">
+                    	<f:link.page pageUid="{settings.nwtripListId}"><f:translate id="tx_nwstripmanage_domain_model_trip.reiseKalender" /></f:link.page>
+                    </div>
+                </div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+			</div>
+		</div>
+	</f:form>
+</div>
+<div class="search-content">
+	<f:if condition="{trips}">
+	<f:then>
+	<f:for each="{trips}" as="trip">
+		<div class="tab{f:format.date(date: trip.travelperiodstart,format:'m')} tab-item">
+			<div class="row d-md-flex">
+				<div class="col-md-4 d-md-flex">
+					<f:for each="{trip.image}" as="img" iteration="iterator">
+						<f:if condition="{iterator.index} == '0' ">
+							<f:then>
+								<f:link.action action="show" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripdetail" arguments="{trip : trip}"  style="background-image:url('{img.originalResource.publicUrl}');" class="trip-image align-self-stretch d-md-flex">
+									<f:image image="{img}" height="200c" width="200c" class="img-responsive"/>
+								</f:link.action>
+							</f:then>
+						</f:if>
+					</f:for>
+				</div>
+				
+				<div class="col-md-8">
+					<div class="trip-detail test">
+						<f:link.action action="show" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripdetail" arguments="{trip : trip}">
+							<h4>{trip.title}</h4>
+						</f:link.action>
+						<div class="trip-description">
+							{trip.description -> f:format.crop(maxCharacters: '100', respectWordBoundaries:'1') -> f:format.html()}
+						</div>
+						<div class="row trip-row">
+	                        <div class="col-sm-6">
+	                        	<div class="trip-duration">
+									{trip.travelperiodstart -> f:format.date()}-{trip.travelperiodend -> f:format.date()}
+								</div>
+	                        </div>
+	                        <div class="col-sm-6 text-right">
+	                            <div class="trip-price">
+	                            	<vh:dayDiff fromDate="{trip.travelperiodstart -> f:format.date()}" toDate="{trip.travelperiodend -> f:format.date()}"/> <f:translate id="tx_nwstripmanage_domain_model_trip.days" />
+	                            	<span><f:format.currency currencySign="€" >{trip.priceperperson}</f:format.currency></span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <a href="#" class="trip-link"><em class="icon icon-arrow-right"></em></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</f:for>
+	</f:then>
+	<f:else>
+		<f:if condition="{submit}">
+			<div class="col-md-12 not-matched">
+				<p><f:translate id="tx_nwstripmanage_domain_model_trip.nothingfound" /></p>
+			</div>
+		</f:if>
+	</f:else>
+	</f:if>
+	
+</div>
+
+
+</f:section>
+</html>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-12-08T19:12:23Z" product-name="nws_tripmanage">
+		<header/>
+		<body>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwstrip">
+				<source>NetzWerkstatt Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwstrip.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwcurrentstrip">
+				<source>NetzWerkstatt Current Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwcurrentstrip.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripfinder">
+				<source>NetzWerkstatt Trip Finder</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripfinder.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripdetail">
+				<source>NetzWerkstatt Trip Details</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripdetail.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripbooking">
+				<source>NetzWerkstatt Trip Bookings</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripbooking.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripremembertrips">
+				<source>NetzWerkstatt Remembered Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripremembertrips.description">
+				<source></source>
+			</trans-unit>
+
+			<trans-unit id="tx_nwstripmanage_domain_model_trip">
+				<source>Trip</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.itinerary">
+				<source>Itinerary</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.hotelpricedetails">
+				<source>Hotel Price Details</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.hotelimages">
+				<source>Hotel Images</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.travelperiodstart">
+				<source>Travel Period Start Date</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.travelperiodend">
+				<source>Travel Period End Date</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.priceperperson">
+				<source>Price Per Person</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.timeprice">
+				<source>Time &amp; Prices</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.tourguide">
+				<source>Tour Guide</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.currenttrip">
+				<source>Current Trip</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.triptype">
+				<source>Reiseart</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.ziel">
+				<source>Ziel</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.gesonderteReisen">
+				<source>Gesonderte Reisen</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.travel_period">
+				<source>Travel Period</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.studentdiscount">
+				<source>Discount for student</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nwstripmanage_domain_model_price">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds">
+				<source>Number of Beds</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.price">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.age">
+				<source>Age</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.studentprice">
+				<source>Price For student</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_abflugort">
+				<source>Abflugort</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.abflugort">
+				<source>Abflugort</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_abflugort.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.2">
+				<source>2 Bettzimmer</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.3">
+				<source>3 Bettzimmer</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.4">
+				<source>4 Bettzimmer</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_price.numberofbeds.items.beds.5">
+				<source>3-4 Bettzimmer</source>
+			</trans-unit>
+
+
+			<trans-unit id="tx_nwstripmanage_domain_model_tourguide">
+				<source>Tour Guide</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_tourguide.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_tourguide.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_tourguide.telephone">
+				<source>Telephone</source>
+			</trans-unit>
+
+
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.description_tablabel">
+				<source>Deine Reise</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.itinerary_tablabel">
+				<source>Reiseverlauf</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.hotelimages_tablabel">
+				<source>Deine Hotels</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.timeprice_tablabel">
+				<source>Termine und Preise</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.tourguide_tablabel">
+				<source>Tour Guide</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.ziel_tablabel">
+				<source>Ziel</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.abflugort_tablabel">
+				<source>Abflugort</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_trip.abflugort_and_referenz_tablabel">
+				<source>Abflugort and Referenz</source>
+			</trans-unit>
+
+
+			<trans-unit id="tx_nwstripmanage_domain_model_booking">
+				<source>Bookings</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.trip">
+				<source>Trip</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.contactperson">
+				<source>Passengers</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.contactpersondetail">
+				<source>Contact Person</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.telephone">
+				<source>Tel</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.street">
+				<source>Street</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.housenumber">
+				<source>House Number</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.plz">
+				<source>Plz</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.abflugort">
+				<source>Abflugort</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.referenz">
+				<source>Referenz</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.travelguidance">
+				<source>Reiseführung</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.travelguidanceother">
+				<source>Reiseführung Andere</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.seminarparticipation">
+				<source>Seminarteilnahme</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.additionalinformation">
+				<source>Zusätzliche Angaben</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.paymentstatus">
+				<source>Payment Status</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.paymentdate">
+				<source>Payment Date</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.verifysign">
+				<source>Verify Sign</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.txnid">
+				<source>Transaction ID</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.payeremail">
+				<source>Payer Email</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.paymentmethod">
+				<source>Payment Method</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.paymentTab">
+				<source>Payment details</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_booking.totalprice">
+				<source>Total Price</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nwstripmanage_domain_model_ziel">
+				<source>Ziel</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_ziel.name">
+				<source>Name</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest">
+				<source>Individuelles Datum Request</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.trip">
+				<source>Trip Details</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.tab">
+				<source>Individuelles Datum</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.gender">
+				<source>Gender</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.email">
+				<source>E-mail</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.firstname">
+				<source>FirstName</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.lastname">
+				<source>LastName</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.street">
+				<source>Street</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.telephone">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.startdate">
+				<source>StartDate</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_daterequest.enddate">
+				<source>EndDate</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson">
+				<source>Passenger</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson.gender">
+				<source>Gender</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson.birthdate">
+				<source>Birthdate</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson.firstname">
+				<source>Firstname</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson.lastname">
+				<source>Lastname</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson.passportnumber">
+				<source>Passportnumber</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson.nationality">
+				<source>Nationality</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson.age">
+				<source>Age</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_contactperson.roomprice">
+				<source>Room Price</source>
+			</trans-unit>
+
+			<trans-unit id="tx_nwstripmanage_domain_model_travelperiod">
+				<source>Travel Period</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_travelperiod.startdate">
+				<source>Start date</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_travelperiod.enddate">
+				<source>End date</source>
+			</trans-unit>
+			<trans-unit id="tx_nwstripmanage_domain_model_travelperiod.price">
+				<source>Price</source>
+			</trans-unit>
+			
+		</body>
+	</file>
+</xliff>

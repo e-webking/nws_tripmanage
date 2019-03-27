@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-12-08T19:12:23Z" product-name="nws_tripmanage">
+		<header/>
+		<body>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwstrip">
+				<source>NetzWerkstatt Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwstrip.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwcurrentstrip">
+				<source>NetzWerkstatt Current Trip List</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwcurrentstrip.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripfinder">
+				<source>NetzWerkstatt Trip Finder</source>
+			</trans-unit>
+			<trans-unit id="tx_nws_tripmanage_domain_model_nwtripfinder.description">
+				<source>We manage all trips on this extension.</source>
+			</trans-unit>
+			<trans-unit id="name.description">
+				<source>name</source>
+			</trans-unit>
+			<trans-unit id="email.description">
+				<source>email</source>
+			</trans-unit>
+			<trans-unit id="telephone.description">
+				<source>telephone</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

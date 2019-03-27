@@ -1,0 +1,69 @@
+<div style="width: 600px; margin: 0 auto;">
+	<h2 align="left">As-Salamu aleikum liebe/r Schwester/Bruder,</h2><br/>
+	<p>Es freut uns, dass Du Dich dazu entschieden hast Deine Reise mit uns anzutreten. Im Folgenden siehst Du den Überblick Deiner Buchung. In Kürze erhältst Du von uns weitere Informationen zu Deiner Reise. </p>
+
+	<h3 align="center">Buchungsinformation</h3>
+	<table width="100%">
+		<tr>
+			<td valign="top">Details zur Reise</td>
+			<td align="right" valign="top">
+				<table width="100%">
+					<tr>
+						<td valign="top">Details zur Reise</td>
+						<td valign="top" align="right">: <strong>{booking.trip.title}</strong></td>
+					</tr>
+					<tr>
+						<td valign="top">Reise Startdatum</td>
+						<td valign="top" align="right">: <strong>{booking.trip.travelperiodstart -> f:format.date()}</strong></td>
+					</tr>
+					<tr>
+						<td valign="top">Reise Endtermin</td>
+						<td align="right">: <strong>{booking.trip.travelperiodend -> f:format.date()}</strong></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Gast Einzelheiten</td>
+			<td align="right" valign="top">
+				<table width="100%">
+					<f:for each="{booking.contactperson}" as="contactpersons" iteration="iterator">
+						<tr>
+							<td valign="top">Gast Einzelheiten {iterator.cycle}</td>
+							<td align="right">: <strong>{contactpersons.firstname} {contactpersons.lastname}</strong></td>
+						</tr>
+					</f:for>		
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Allgemeine Information</td>
+			<td align="right" valign="top">
+				<table width="100%">
+					<tr>
+						<td valign="top">Tel</td>
+						<td align="right">: <strong>{booking.telephone}</strong></td>
+					</tr>
+					<tr>
+						<td valign="top">Email</td>
+						<td align="right">: <strong>{booking.email}</strong></td>
+					</tr>
+					<tr>
+						<td valign="top">Adresse 1</td>
+						<td align="right">: <strong>{booking.street} {booking.housenumber}</strong></td>
+					</tr>
+					<tr>
+						<td valign="top">Adresse 2</td>
+						<td align="right">: <strong>{booking.city} {booking.plz}</strong></td>
+					</tr>
+					<tr>
+						<td valign="top">Land</td>
+						<td align="right">: <strong>{booking.country}</strong></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<p><b>Hinweis:</b>You have to at least pay the deposit within the neyt 14 days</p>
+	<p>	<b>Herzliche Grüße <br /> Deine BALCOK Familie</b></p>
+</div>

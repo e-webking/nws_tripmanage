@@ -1,0 +1,136 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+<div class="trip-details">
+	<div class="row">
+    	<div class="col-md-5">
+        	<div class="product-detail-left">
+    			<div class="product-slider">
+    				<f:for each="{trip.image}" as="img">
+	                	<div>
+	                    	<f:image image="{img}" height="200c" width="200c" class="img-responsive" absolute="1"/>
+	                    </div>
+	                </f:for>
+                </div>
+                <div class="product-thumb-slider">
+                	<f:for each="{trip.image}" as="img">
+	                	<div>
+	                    	<f:image image="{img}" height="200c" width="200c" class="img-responsive" absolute="1"/>
+	                    </div>
+	                </f:for>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+        	<div class="product-detail-right">
+            	<div class="detail-strip clearfix">
+                	<div class="pull-left rememberTrip">
+                    	<f:link.action action="rememberTrip" controller="Trip" extensionName="NwsTripmanage" arguments="{trip:trip}" arguments="{trip:trip}" pluginName="Nwtripdetail">Remember Trip</f:link.action>
+                    </div>
+                    <ul class="pull-right tripPdf">
+                    	<li>
+                    		<f:link.action action="createPdf" controller="Trip" extensionName="NwsTripmanage" arguments="{trip:trip}">
+                    			<button type="button" class="pdf-icon"></button>
+                    		</f:link.action>
+                    	</li>
+                        <li><button type="button" class="printer-icon" onclick="javascript:window.print()"></button></li>
+                    </ul>
+                </div>
+                <div class="product-price">
+                	<div class="d-sm-flex align-items-center justify-content-between">
+                    	<label>Buchungcode:</label>
+                        <div></div>
+                    </div>
+                    <div class="d-sm-flex align-items-center justify-content-between">
+                    	<label>Termin:</label>	
+                        <div class="trip-duration">
+                        	<f:form action="" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripbooking" arguments="{trip: trip}">
+                        	<f:form.select name="tripDate" options="{tripDate: '{trip.travelperiodstart -> f:format.date()}-{trip.travelperiodend -> f:format.date()}', dateRequest: 'request an individual appointment'}" />
+                        	</f:form>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex align-items-center justify-content-between">
+                    	<label>Preis:</label>	
+                        <div class="trip-price">
+                            <vh:dayDiff fromDate="{trip.travelperiodstart -> f:format.date()}" toDate="{trip.travelperiodend -> f:format.date()}"/>
+                            <f:translate id="tx_nwstripmanage_domain_model_trip.days" />
+                            <span><f:format.currency currencySign="€" >{trip.priceperperson}</f:format.currency></span>
+                        </div>
+                    </div>
+                    <div class="clearfix bookingTrip">
+        				<f:link.action arguments="{trip:trip}" pageUid="{settings.flexform.bookingpage.pid}" action="bookingForm" controller="Trip" extensionName="NwsTripmanage" pluginName="Nwtripbooking" class="btn btn-default pull-right">Booking <em class="icon-arrow-right"></em></f:link.action>
+                    </div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tabbable">
+	<ul class="nav nav-tabs ">	
+		<li class="nav-link active" role="presentation">
+			<a href="#tab-detail-0" aria-controls="tab-detail-0" role="tab" data-toggle="tab" aria-expanded="true">Deine Reise</a>
+		</li>
+		<li class="nav-link" role="presentation">
+			<a href="#tab-detail-1" aria-controls="tab-detail-1" role="tab" data-toggle="tab" aria-expanded="false">Reiseverlauf</a>
+		</li>
+		<li class="nav-link " role="presentation">
+			<a href="#tab-detail-2" aria-controls="tab-detail-2" role="tab" data-toggle="tab">Termine und Preise</a>
+		</li>
+		<li class="nav-link " role="presentation">
+			<a href="#tab-detail-3" aria-controls="tab-detail-3" role="tab" data-toggle="tab">Deine Hotels</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane fade active in" id="tab-detail-0">
+			<f:format.html>{trip.description}</f:format.html>
+		</div>
+		<div class="tab-pane fade" id="tab-detail-1">
+			<f:format.html>{trip.itinerary}</f:format.html>
+		</div>
+		<div class="tab-pane fade" id="tab-detail-2">
+			<f:format.html>{trip.hotelpricedetails}</f:format.html>
+		</div>
+		<div class="tab-pane fade" id="tab-detail-3">
+			<f:for each="{trip.hotelimages}" as="hotelimage">
+				<div class="csc-default">
+					<div class="csc-textpic">
+						<div class="csc-textpic-imagewrap">
+							<figure class="csc-textpic-image">
+								<h3 class="csc-firstHeader">{hotelimage.originalResource.properties.title}</h3>
+								<f:image image="{hotelimage}" width="920" treatIdAsReference="1" absolute="1" />
+								<figcaption class="csc-textpic-caption">
+									<f:format.raw>{hotelimage.originalResource.properties.description}</f:format.raw>
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+			</f:for>
+		</div>
+	</div>
+</div>
+
+<f:render partial="Trip/dateRequest" arguments="{_all}" />
+<f:comment>
+	<h1>Single View for Trip</h1>
+
+	<f:flashMessages />
+	<f:render partial="Trip/Properties" arguments="{trip:trip}" />
+	<f:link.action action="list">Back to list</f:link.action><br />
+	<f:link.action action="new">New Trip</f:link.action>
+</f:comment>
+</f:section>
+</html>

@@ -1,0 +1,25 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+	<div class="trip-details">
+		<div class="row">
+			<f:flashMessages />
+			<div class="successMsg">
+				<h1>Thank you</h1>
+				<p>Thank you for your <strong>individuelle Terminanfrage</strong><br> We will contact you soon.</p>
+			</div>
+		</div>
+	</div>
+</f:section>

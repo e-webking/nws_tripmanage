@@ -1,0 +1,82 @@
+<div style="width: 600px; margin: 0 auto;">
+	<h2 align="left">Thank you for you booking</h2><br/>
+
+	<h3 align="center">Booking Information</h3>
+	<table width="100%">
+		<caption>Booking Information</caption>
+		<tr>
+			<td valign="top">Trip detail</td>
+			<td align="right" valign="top">
+				<table width="100%">
+					<tr>
+						<td valign="top">Trip Name</td>
+						<td valign="top" align="right">: <strong>{booking.trip.title}</strong></td>
+					</tr>
+					<tr>
+						<td valign="top">Travel Period Start Date</td>
+						<td valign="top" align="right">: <strong>{booking.trip.travelperiodstart -> f:format.date()}</strong></td>
+					</tr>
+					<tr>
+						<td valign="top">Travel Period End Date</td>
+						<td align="right">: <strong>{booking.trip.travelperiodend -> f:format.date()}</strong></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Passenger details</td>
+			<td align="right" valign="top">
+				<table width="100%">
+					<f:for each="{booking.contactperson}" as="contactpersons" iteration="iterator">
+						<tr>
+							<td valign="top">Paasenger detail {iterator.cycle}</td>
+							<td align="right">: <strong>{contactpersons.firstname} {contactpersons.lastname}</strong></td>
+						</tr>
+					</f:for>		
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Tel</td>
+			<td align="right">: <strong>{booking.telephone}</strong></td>
+		</tr>
+		<tr>
+			<td valign="top">Email</td>
+			<td align="right">: <strong>{booking.email}</strong></td>
+		</tr>
+		<tr>
+			<td valign="top">Address 1</td>
+			<td align="right">: <strong>{booking.street} {booking.housenumber}</strong></td>
+		</tr>
+		<tr>
+			<td valign="top">Address 2</td>
+			<td align="right">: <strong>{booking.city} {booking.plz}</strong></td>
+		</tr>
+		<tr>
+			<td valign="top">Country</td>
+			<td align="right">: <strong>{booking.country}</strong></td>
+		</tr>
+	</table>
+	<hr/>
+	<br/>
+	<h3 align="center">Payment Information</h3>
+	<table width="100%">
+		<caption>Payment Information</caption>
+		<tr>
+			<td valign="top">Payment Method</td>
+			<td align="right">: <strong>{booking.paymentmethod}<strong></td>
+		</tr>
+		<tr>
+			<td valign="top">Payment Status</td>
+			<td align="right">: {booking.paymentstatus}</td>
+		</tr>
+		<tr>
+			<td valign="top">Payment date</td>
+			<td align="right">: {booking.paymentdate}</td>
+		</tr>
+		<tr>
+			<td valign="top">Transaction ID</td>
+			<td align="right">: {booking.txnid}</td>
+		</tr>
+	</table>
+</div>

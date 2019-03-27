@@ -1,0 +1,115 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="main">
+	<link rel="stylesheet" href="{f:uri.resource(path: 'css/style.css', extensionName: 'nws_tripmanage', absolute: 1)}">
+	<div class="test">
+		<h2>Vielen Dank für Dein Interesse!</h2>
+		<p>Auf den folgenden Seiten findest Du Deine Reiseübersicht. Diese umfasst den Reiseverlauf, die Reiseleistungen, den von dir gewünschten Termin sowie den dazugehörigen Preis und die Hotels. Zudem möchten wir Dich vorab darüber in Kenntnis setzen, dass es ggf. kurzfristig zu kleineren Änderungen kommen kann.</p>
+		<p>Balcok Reisen ist ein offizieller Reiseveranstalter für die große (Hadsch) und kleine (Umrah) Pilgerfahrt nach Mekka mit über 30 Jahren Erfahrung. Wir zeichnen uns durch unser vielfältiges Angebot und unsere erstklassige Qualität aus. All unsere Reisen sind stets optimal und nach den Wünschen unserer Pilger geplant. Durch unsere Ausrichtung auf die vier Rechtsschulen ist es uns möglich die Pilgerreise für Jeden anzubieten. Besonderen Wert legen wir auf qualifizierte Gruppenleiter, die Dich von Beginn an der Reise bis hin zur Rückkehr begleiten.</p>
+		<p>Für Fragen zu Deiner Reise stehen wir Dir gerne telefonisch zur Verfügung. Du erreichst uns telefonisch unter 0201-125 833 0 (Mo.-Fr. von 9:00 bis 18:00 Uhr, Sa. von 09:30 bis 13:30 Uhr). Alternativ kannst Du uns gerne bei uns im Büro besuchen. Unser Team berät Dich gerne auch vor Ort. Die Adresse entnimmst Du dem folgenden Abschnitt.</p>
+		<b>BALCOK Travel Agency GmbH</b><br/>
+		<b>Altenessener Str. 323</b><br/>
+		<b>45326 Essen</b><br/>
+		<p>Wir freuen uns auf Deine Anfrage und hoffen Dich bald als unseren Gast begrüßen zu können.</p>
+		<p>Herzliche Grüße<br />
+		Dein BALCOK-Team</p>
+		<br/>
+	</div>
+	<div class="trip-details">
+		<div class="row">
+			
+	    	<div class="col-md-5">
+	        	<div class="product-detail-left">
+	    			<div class="product-slider">
+	    				<f:for each="{trip.image}" as="img" iteration="iteration">
+	    					<f:if condition="{iterator.index} == 0">
+			                	<div>
+			                    	<f:image image="{img}" height="200c" width="200c" class="img-responsive" absolute="1"/>
+			                    	
+
+			                    </div>
+			                </f:if>
+		                </f:for>
+	                </div>
+	                <div class="product-thumb-slider">
+	                	<f:for each="{trip.image}" as="img">
+		                	<div>
+		                    	<f:image image="{img}" height="200c" width="200c" class="img-responsive" absolute="1"/>
+		                    </div>
+		                </f:for>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-md-7">
+	        	<div class="product-detail-right">
+	            	<div class="detail-strip clearfix">
+	                	<div class="pull-left">
+	                    	<f:link.action action="rememberTrip" controller="Trip" extensionName="NwsTripmanage" arguments="{trip:trip}" arguments="{trip:trip}" pluginName="Nwtripdetail">Remember Trip</f:link.action>
+	                    </div>
+	                    <ul class="pull-right">
+	                    	<li>
+	                    		<f:link.action action="createPdf" controller="Trip" extensionName="NwsTripmanage" arguments="{trip:trip}">
+	                    			<button type="button" class="pdf-icon"></button>
+	                    		</f:link.action>
+	                    	</li>
+	                        <li><button type="button" class="printer-icon"></button></li>
+	                    </ul>
+	                </div>
+	                <div class="product-price">
+	                	<div class="d-sm-flex align-items-center justify-content-between">
+	                    	<label>lorem:</label>
+	                        <div>Text</div>
+	                    </div>
+	                    <div class="d-sm-flex align-items-center justify-content-between">
+	                    	<label>lorem:</label>	
+	                        <div class="trip-duration">
+	                            {trip.travelperiodstart -> f:format.date()}-{trip.travelperiodend -> f:format.date()}
+	                        </div>
+	                    </div>
+	                    <div class="d-sm-flex align-items-center justify-content-between">
+	                    	<label>lorem:</label>	
+	                        <div class="trip-price">
+	                            <vh:dayDiff fromDate="{trip.travelperiodstart -> f:format.date()}" toDate="{trip.travelperiodend -> f:format.date()}"/>
+	                            <f:translate id="tx_nwstripmanage_domain_model_trip.days" />
+	                            <span><f:format.currency currencySign="€" >{trip.priceperperson}</f:format.currency></span>
+	                        </div>
+	                    </div>
+					</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="tabbable">
+		<div class="tab-content">
+			<div class="tab-pane fade active in" id="tab-detail-0">
+				<f:format.html>{trip.description}</f:format.html>
+			</div>
+			<div class="tab-pane fade" id="tab-detail-1">
+				<f:format.html>{trip.itinerary}</f:format.html>
+			</div>
+			<div class="tab-pane fade" id="tab-detail-2">
+				<f:format.html>{trip.hotelpricedetails}</f:format.html>
+			</div>
+			<div class="tab-pane fade" id="tab-detail-3">
+				<f:for each="{trip.hotelimages}" as="hotelimage">
+					<div class="csc-default">
+						<div class="csc-textpic">
+							<div class="csc-textpic-imagewrap">
+								<figure class="csc-textpic-image">
+									<h3 class="csc-firstHeader">{hotelimage.originalResource.properties.title}</h3>
+									<f:image image="{hotelimage}" width="920" treatIdAsReference="1" absolute="1" />
+									<figcaption class="csc-textpic-caption">
+										<f:format.raw>{hotelimage.originalResource.properties.description}</f:format.raw>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</f:for>
+			</div>
+		</div>
+	</div>
+</f:section>
+</html>
